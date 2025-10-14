@@ -38,7 +38,7 @@ public class Sorters{
         for (int i=0; i < (n-1); i++){
             int min = i; // marca a posição para a inserção do menor elemento
             for (int j = i+1; j < n; j++){
-                if ( A[j].compareTo(A[min]) < 0 ) min = j; // encontra e marca a posição de um menor elemento
+                if ( A[j].compareTo(A[min]) > 0 ) min = j; // encontra e marca a posição de um menor elemento
             }
 
             // troca os valores entre as duas posições
@@ -62,7 +62,6 @@ public class Sorters{
         }
     }
 
-
     public static <T extends Comparable<T>> void bubbleSort(T[] A, int n){
         boolean troca = true;
         
@@ -80,6 +79,4 @@ public class Sorters{
             }
         }
     }
-
-
 }
