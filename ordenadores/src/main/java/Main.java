@@ -1,6 +1,7 @@
 import utils.Sorters;
 import java.util.Random;
 import java.lang.System;
+import java.lang.String;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,14 +9,39 @@ public class Main {
             System.out.println("Erro! Falta de passagem de parâmetro ou parâmetro menor que 1!");
             return;
         }
+        
+        long inicio, fim;
+        inicio = fim = 0; 
 
         int tamanho = Integer.parseInt(args[0]);
+        String algoritmo = args[1];
+        
         Integer[] array = gerarArrayAleatorio(tamanho);
         
-        long inicio = System.nanoTime(); // marca tempo inicial
-        //Sorters.bubbleSort(array, tamanho);
-        Sorters.insertionSort(array, tamanho);
-        long fim = System.nanoTime();    // marca tempo final
+        switch(algoritmo) {
+				case "bubble" :
+					inicio = System.nanoTime(); // marca tempo inicial
+					Sorters.bubbleSort(array, tamanho);
+					fim = System.nanoTime();    // marca tempo final
+					break;
+				case "insertion" :
+					inicio = System.nanoTime();
+					Sorters.insertionSort(array, tamanho);
+					fim = System.nanoTime();
+					break;
+				case "selection" :
+					inicio = System.nanoTime();
+					Sorters.selectionSort(array, tamanho);
+					fim = System.nanoTime();
+					break;
+				case "quick" :
+					display
+					inicio = System.nanoTime();
+					Sorters.quickSort(array, array[1], array[tamanho - 1]);
+					fim = System.nanoTime();
+					break;
+		}
+
         double tempoMs = (fim - inicio)/1_000_000.0; // converte para milissegundos
         
         System.out.printf("\nTempo de execução: %.10f ms\n", tempoMs);
