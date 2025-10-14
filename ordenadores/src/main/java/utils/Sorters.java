@@ -1,7 +1,7 @@
 package utils; 
 
 public class Sorters{
-	static <T extends Comparable<T>> int partition(T[] A, int low, int high) {
+	private static <T extends Comparable<T>> int partition(T[] A, int low, int high) {
         
         // escolhe o pivo
         T pivot = A[high];
@@ -19,7 +19,7 @@ public class Sorters{
         return i + 1;
     }
 
-    static <T extends Comparable<T>> void swap(T[] A, int i, int j) {
+    private static <T extends Comparable<T>> void swap(T[] A, int i, int j) {
         T temp = A[i];
         A[i] = A[j];
         A[j] = temp;
@@ -34,7 +34,7 @@ public class Sorters{
         }
     }
 
-	static <T extends Comparable<T>> void merge(T A[], int l, int m, int r){
+	private static <T extends Comparable<T>> void merge(T A[], int l, int m, int r){
         
         // Find sizes of two subAays to be merged
         int n1 = m - l + 1;
@@ -101,7 +101,7 @@ public class Sorters{
         }
     }
 
-	static <T extends Comparable<T>> void heapify(T A[], int n, int i) {
+	private static <T extends Comparable<T>> void heapify(T A[], int n, int i) {
 
         // Initialize largest as root
         int largest = i; 
@@ -226,4 +226,5 @@ public class Sorters{
         }
     }
 }
+
 
