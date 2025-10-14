@@ -20,25 +20,32 @@ public class Main {
         
         switch(algoritmo) {
 				case "bubble" :
+					display(array);
 					inicio = System.nanoTime(); // marca tempo inicial
 					Sorters.bubbleSort(array, tamanho);
 					fim = System.nanoTime();    // marca tempo final
+					display(array);
 					break;
 				case "insertion" :
+					display(array);
 					inicio = System.nanoTime();
 					Sorters.insertionSort(array, tamanho);
 					fim = System.nanoTime();
+					display(array);
 					break;
 				case "selection" :
+					display(array);
 					inicio = System.nanoTime();
 					Sorters.selectionSort(array, tamanho);
 					fim = System.nanoTime();
+					display(array);
 					break;
 				case "quick" :
-					display
+					display(array);
 					inicio = System.nanoTime();
-					Sorters.quickSort(array, array[1], array[tamanho - 1]);
+					Sorters.quickSort(array, 0, (tamanho - 1));
 					fim = System.nanoTime();
+					display(array);
 					break;
 		}
 
@@ -58,10 +65,11 @@ public class Main {
         return array;
     }
     
-    public static void display(Integer[] vetor){
-        for (int i = 0; i < vetor.length; i++) {
-            System.out.print(vetor[i]);
+    public static void display(Integer[] array){
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
             System.out.print(", ");
         }
+        System.out.print("\n");
     }
 }
