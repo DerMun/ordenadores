@@ -40,7 +40,9 @@ public class Sorters{
         int n1 = m - l + 1;
         int n2 = r - m;
         
-        T[] L = (T[]) new Comparable[n1];
+        @SuppressWarnings("unchecked") // remove o warning ao compilar
+        T[] L = (T[]) new Comparable[n1]; // causa warning pois não está especificado o tipo de dados
+        @SuppressWarnings("unchecked")
         T[] R = (T[]) new Comparable[n2];
 
         // Copy data to temp Aays
@@ -224,3 +226,4 @@ public class Sorters{
         }
     }
 }
+
