@@ -1,75 +1,226 @@
-import utils.Sorters;
-import java.util.Random;
-import java.lang.System;
-import java.lang.String;
+package utils; 
 
-public class Main {
-    public static void main(String[] args) {
-        if (args.length == 0) {
-            System.out.println("Erro! Falta de passagem de parâmetro ou parâmetro menor que 1!");
-            return;
+public class Sorters{
+	static <T extends Comparable<T>> int partition(T[] A, int low, int high) {
+        
+        // escolhe o pivo
+        T pivot = A[high];
+        
+        int i = low - 1;
+
+        for (int j = low; j <= high - 1; j++) {
+            if (A[j].compareTo(pivot) < 0) {
+                i++;
+                swap(A, i, j);
+            }
         }
-        
-        long inicio, fim;
-        inicio = fim = 0; 
 
-        int tamanho = Integer.parseInt(args[0]);
-        String algoritmo = args[1];
-        
-        Integer[] array = gerarArrayAleatorio(tamanho);
-        
-        switch(algoritmo) {
-				case "bubble" :
-					display(array);
-					inicio = System.nanoTime(); // marca tempo inicial
-					Sorters.bubbleSort(array, tamanho);
-					fim = System.nanoTime();    // marca tempo final
-					display(array);
-					break;
-				case "insertion" :
-					display(array);
-					inicio = System.nanoTime();
-					Sorters.insertionSort(array, tamanho);
-					fim = System.nanoTime();
-					display(array);
-					break;
-				case "selection" :
-					display(array);
-					inicio = System.nanoTime();
-					Sorters.selectionSort(array, tamanho);
-					fim = System.nanoTime();
-					display(array);
-					break;
-				case "quick" :
-					display(array);
-					inicio = System.nanoTime();
-					Sorters.quickSort(array, 0, (tamanho - 1));
-					fim = System.nanoTime();
-					display(array);
-					break;
-		}
-
-        double tempoMs = (fim - inicio)/1_000_000.0; // converte para milissegundos
-        
-        System.out.printf("\nTempo de execução: %.10f ms\n", tempoMs);
+        swap(A, i + 1, high);  
+        return i + 1;
     }
 
-    static Integer[] gerarArrayAleatorio(int tamanho) {
-        Random random = new Random();
-        Integer[] array = new Integer[tamanho];
-
-        for (int i = 0; i < tamanho; i++) {
-            array[i] = random.nextInt(tamanho); // gera número de 0 a n
-        }
-
-        return array;
+    static <T extends Comparable<T>> void swap(T[] A, int i, int j) {
+        T temp = A[i];
+        A[i] = A[j];
+        A[j] = temp;
     }
-    
-    public static void display(Integer[] array){
-        for (int i = 0; i < array.length; i++) {
-            System.out.print(array[i]);
-            System.out.print(", ");
+
+    public static <T extends Comparable<T>> void quickSort(T[] A, int low, int high) {
+        if (low < high) {
+            int pi = partition(A, low, high);
+
+            quickSort(A, low, pi - 1);
+            quickSort(A, pi + 1, high);
         }
-        System.out.print("\n");
+    }
+
+	static <T extends Comparable<T>> void merge(T A[], int l, int m, int r){
+        
+        // Find sizes of two subAays to be merged
+        int n1 = m - l + 1;
+        int n2 = r - m;
+        
+        T[] L = (T[]) new Comparable[n1];
+        T[] R = (T[]) new Comparable[n2];
+
+        // Copy data to temp Aays
+        for (int i = 0; i < n1; ++i)
+            L[i] = A[l + i];
+        for (int j = 0; j < n2; ++j)
+            R[j] = A[m + 1 + j];
+
+        // Merge the temp Aays
+
+        // Initial indices of first and second subAays
+        int i = 0, j = 0;
+
+        // Initial index of merged subAay Aay
+        int k = l;
+        while (i < n1 && j < n2) {
+            if (L[i].compareTo(R[j]) <= 0) {
+                A[k] = L[i];
+                i++;
+            }
+            else {
+                A[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        // copia elementos restantes de L
+        while (i < n1) {
+            A[k] = L[i];
+            i++;
+            k++;
+        }
+
+        // copia elementos restantes de R
+        while (j < n2) {
+            A[k] = R[j];
+            j++;
+            k++;
+        }
+    }
+
+    public static <T extends Comparable<T>> void mergeSort(T A[], int l, int r){
+        
+        if (l < r) {
+
+            // Find the middle point
+            int m = l + (r - l) / 2;
+
+            // Sort first and second halves
+            mergeSort(A, l, m);
+            mergeSort(A, m + 1, r);
+
+            // Merge the sorted halves
+            merge(A, l, m, r);
+        }
+    }
+
+	static <T extends Comparable<T>> void heapify(T A[], int n, int i) {
+
+        // Initialize largest as root
+        int largest = i; 
+
+        // left index = 2*i + 1
+        int l = 2 * i + 1; 
+
+        // right index = 2*i + 2
+        int r = 2 * i + 2;
+
+        // If left child is larger than root
+        if (l < n && A[l].compareTo(A[largest]) > 0) {
+            largest = l;
+        }
+
+        // If right child is larger than largest so far
+        if (r < n && A[r].compareTo(A[largest]) > 0) {
+            largest = r;
+        }
+
+        // If largest is not root
+        if (largest != i) {
+            T temp = A[i];
+            A[i] = A[largest];
+            A[largest] = temp;
+
+            // Recursively heapify the affected sub-tree
+            heapify(A, n, largest);
+        }
+    }
+
+    // Main function to do heap sort
+    public static <T extends Comparable<T>> void heapSort(T A[], int n) {
+        // Build heap (reAange Aay)
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            heapify(A, n, i);
+        }
+        // One by one extract an element from heap
+        for (int i = n - 1; i > 0; i--) {
+
+            // Move current root to end
+            T temp = A[0]; 
+            A[0] = A[i];
+            A[i] = temp;
+
+            // Call max heapify on the reduced heap
+            heapify(A, i, 0);
+        }
+    }
+
+	public static <T extends Comparable<T>> void shellSort(T A[], int n) {
+        // Start with a big gap, then reduce the gap
+        for (int gap = n/2; gap > 0; gap /= 2)
+        {
+            // Do a gapped insertion sort for this gap size.
+            // The first gap elements a[0..gap-1] are already
+            // in gapped order keep adding one more element
+            // until the entire Aay is gap sorted
+            for (int i = gap; i < n; i += 1)
+            {
+                // add a[i] to the elements that have been gap
+                // sorted save a[i] in temp and make a hole at
+                // position i
+                T temp = A[i];
+
+                // shift earlier gap-sorted elements up until
+                // the correct location for a[i] is found
+                int j;
+                for (j = i; j >= gap && A[j - gap].compareTo(temp) > 0; j -= gap)
+                    A[j] = A[j - gap];
+
+                // put temp (the original a[i]) in its correct
+                // location
+                A[j] = temp;
+            }
+        }
+    }
+
+    public static <T extends Comparable<T>> void selectionSort(T[] A, int n){
+        for (int i=0; i < (n-1); i++){
+            int min = i; // marca a posição para a inserção do menor elemento
+            for (int j = i+1; j < n; j++){
+                if ( A[j].compareTo(A[min]) > 0 ) min = j; // encontra e marca a posição de um menor elemento
+            }
+
+            // troca os valores entre as duas posições
+            T temp = A[i];
+            A[i] = A[min];
+            A[min] = temp;
+        }
+
+    }
+
+    public static <T extends Comparable<T>> void insertionSort(T[] A, int n){
+        for(int i = 1; i < n; i++){
+            T key = A[i];
+            //Inserir A[i] no subvetor ordenado A[1 .. i – 1].
+            int j = i - 1;
+            while (j >= 0 && A[j].compareTo(key) > 0){
+                A[j + 1] = A[j];
+                j--;
+            }
+            A[j + 1] = key;
+        }
+    }
+
+    public static <T extends Comparable<T>> void bubbleSort(T[] A, int n){
+        boolean troca = true;
+        
+        while(troca){
+            for( int i = 0; i < (n-1); i++){
+                troca = false;
+                for(int j = 0; j < (n-1); j++){
+                    if(A[j].compareTo(A[j+1]) > 0){
+                        troca = true;
+                        T temp = A[j];
+                        A[j] = A[j+1];
+                        A[j+1] = temp;
+                    }
+                }
+            }
+        }
     }
 }
