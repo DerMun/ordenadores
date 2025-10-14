@@ -1,6 +1,38 @@
 package utils;
 
 public class Sorters{
+	static <T extends Comparable<T>> int partition(T[] a, int low, int high) {
+        
+        // escolhe o pivo
+        T pivot = a[high];
+        
+        int i = low - 1;
+
+        for (int j = low; j <= high - 1; j++) {
+            if (a[j].compareTo(pivot) < 0) {
+                i++;
+                swap(a, i, j);
+            }
+        }
+
+        swap(a, i + 1, high);  
+        return i + 1;
+    }
+
+    static <T extends Comparable<T>> void swap(T[] a, int i, int j) {
+        T temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
+
+    public static <T extends Comparable<T>> void quickSort(T[] a, int low, int high) {
+        if (low < high) {
+            int pi = partition(a, low, high);
+
+            quickSort(a, low, pi - 1);
+            quickSort(a, pi + 1, high);
+        }
+    }
 
     public static <T extends Comparable<T>> void selectionSort(T[] A, int n){
         for (int i=0; i < (n-1); i++){
