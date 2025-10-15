@@ -80,6 +80,27 @@ public class Main {
                     fim = System.nanoTime();
                     display(arrayOrd);
                     break;
+				case "radix" :
+    				display(array);
+    				//numero maximo de digitos
+				    int max = array[0];
+    				for(int i = 1; i < tamanho; i++){
+        				if(array[i] > max){
+            				max = array[i];
+        				}
+    				}
+					//numero de dugitos do maior valor
+					int d = 0;
+					int temp = max;
+					while (temp > 0) {
+						d++;
+						temp = temp / 10;
+					}
+					inicio = System.nanoTime();
+					Sorters.radixSort(array, tamanho, d);
+					fim = System.nanoTime();
+					display(array);
+					break;
 		}
 
         double tempoMs = (fim - inicio)/1_000_000.0; // converte para milissegundos
