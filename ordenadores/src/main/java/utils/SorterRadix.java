@@ -226,9 +226,10 @@ public class Sorters{
         }
     }
 
-    public static Integer[] countingSort(Integer[] A, int n, int k) {
+    public static <T extends Comparable<T>> T[] countingSort(T[] A, int n, int k){
         //cria B[1 : n] e o C[0 : k]
-        Integer[] B = new Integer[n];
+        @SuppressWarnings("unchecked")
+        T[] B = (T[]) new Comparable[n];
         int[] C = new int[k + 1];
         
         for (int i = 0; i <= k; i++){
@@ -236,7 +237,7 @@ public class Sorters{
         }
     
         for (int j = 0; j < n; j++){//conta frequencia dos numeros
-            C[A[j]] = C[A[j]] + 1;
+            C[(Integer) A[j]] = C[(Integer) A[j]] + 1;
         }
 
         for (int i = 1; i <= k; i++){//acumula as contagens dos numeros
@@ -244,29 +245,30 @@ public class Sorters{
         }
     
         for (int j = n - 1; j >= 0; j--){
-            B[C[A[j]] - 1] = A[j];
-            C[A[j]] = C[A[j]] - 1;
+            B[C[(Integer) A[j]] - 1] = A[j];
+            C[(Integer) A[j]] = C[(Integer) A[j]] - 1;
         }
 
         return B;
-        }
+    }
 
-    public static void radixSort(Integer[] A, int n, int d){
+    public static <T extends Comparable<T>> void radixSort(T[] A, int n, int d){
+        @SuppressWarnings("unchecked")
+        T[] B = (T[]) new Comparable[n];
         for (int digito = 1; digito <= d; digito++){
-            Integer[] B = new Integer[n];
             int[] C = new int[10];
             for (int i = 0; i < 10; i++){
                 C[i] = 0;
             }
             for (int i = 0; i < n; i++){//conta frequência dos dígitos
-                int digitoAtual = (A[i] / (int) Math.pow(10, digito - 1)) % 10;
+                int digitoAtual = ((Integer)A[i] / (int) Math.pow(10, digito - 1)) % 10;
                 C[digitoAtual]++;
             }
             for (int i = 1; i < 10; i++){//acumula contagens
                 C[i] = C[i] + C[i - 1];
             }
             for (int i = n - 1; i >= 0; i--){
-                int digitoAtual = (A[i] / (int) Math.pow(10, digito - 1)) % 10;
+                int digitoAtual = ((Integer)A[i] / (int) Math.pow(10, digito - 1)) % 10;
                 B[C[digitoAtual] - 1] = A[i];
                 C[digitoAtual]--;
             }
