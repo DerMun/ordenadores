@@ -1,7 +1,7 @@
 package utils; 
 
 public class Sorters{
-	private static <T extends Comparable<T>> int partition(T[] A, int low, int high) {
+	static <T extends Comparable<T>> int partition(T[] A, int low, int high) {
         
         // escolhe o pivo
         T pivot = A[high];
@@ -19,7 +19,7 @@ public class Sorters{
         return i + 1;
     }
 
-    private static <T extends Comparable<T>> void swap(T[] A, int i, int j) {
+    static <T extends Comparable<T>> void swap(T[] A, int i, int j) {
         T temp = A[i];
         A[i] = A[j];
         A[j] = temp;
@@ -34,7 +34,7 @@ public class Sorters{
         }
     }
 
-	private static <T extends Comparable<T>> void merge(T A[], int l, int m, int r){
+	static <T extends Comparable<T>> void merge(T A[], int l, int m, int r){
         
         // Find sizes of two subAays to be merged
         int n1 = m - l + 1;
@@ -101,7 +101,7 @@ public class Sorters{
         }
     }
 
-	private static <T extends Comparable<T>> void heapify(T A[], int n, int i) {
+	static <T extends Comparable<T>> void heapify(T A[], int n, int i) {
 
         // Initialize largest as root
         int largest = i; 
@@ -225,6 +225,54 @@ public class Sorters{
             }
         }
     }
+
+    public static <T extends Comparable<T>> T[] countingSort(T[] A, int n, int k){
+        //cria B[1 : n] e o C[0 : k]
+        @SuppressWarnings("unchecked")
+        T[] B = (T[]) new Comparable[n];
+        int[] C = new int[k + 1];
+        
+        for (int i = 0; i <= k; i++){
+            C[i] = 0;
+        }
+    
+        for (int j = 0; j < n; j++){//conta frequencia dos numeros
+            C[(Integer) A[j]] = C[(Integer) A[j]] + 1;
+        }
+
+        for (int i = 1; i <= k; i++){//acumula as contagens dos numeros
+            C[i] = C[i] + C[i - 1];
+        }
+    
+        for (int j = n - 1; j >= 0; j--){
+            B[C[(Integer) A[j]] - 1] = A[j];
+            C[(Integer) A[j]] = C[(Integer) A[j]] - 1;
+        }
+
+        return B;
+    }
+
+    public static <T extends Comparable<T>> void radixSort(T[] A, int n, int d){
+        @SuppressWarnings("unchecked")
+        T[] B = (T[]) new Comparable[n];
+        for (int digito = 1; digito <= d; digito++){
+            int[] C = new int[10];
+            for (int i = 0; i < 10; i++){
+                C[i] = 0;
+            }
+            for (int i = 0; i < n; i++){//conta frequência dos dígitos
+                int digitoAtual = ((Integer)A[i] / (int) Math.pow(10, digito - 1)) % 10;
+                C[digitoAtual]++;
+            }
+            for (int i = 1; i < 10; i++){//acumula contagens
+                C[i] = C[i] + C[i - 1];
+            }
+            for (int i = n - 1; i >= 0; i--){
+                int digitoAtual = ((Integer)A[i] / (int) Math.pow(10, digito - 1)) % 10;
+                B[C[digitoAtual] - 1] = A[i];
+                C[digitoAtual]--;
+            }
+            System.arraycopy(B, 0, A, 0, n);
+        }
+    }
 }
-
-
