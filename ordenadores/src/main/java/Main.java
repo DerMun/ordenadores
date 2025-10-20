@@ -67,6 +67,39 @@ public class Main {
 					fim = System.nanoTime();
 					display(array);
 					break;
+                case "counting" :
+                    display(array);
+                    int k = 0;
+                    for (int x = 0; x < tamanho; x++){ //calcula o valor máximo
+                        if (array[x].compareTo(k) > 0){
+                            k = array[x];
+                        }
+                    }
+                    inicio = System.nanoTime();
+                    Integer[] arrayOrd = Sorters.countingSort(array, tamanho, k);
+                    fim = System.nanoTime();
+                    display(arrayOrd);
+                    break;
+				case "radix" :
+    				display(array);
+				    int max = array[0];//numero maximo de digitos
+    				for(int i = 1; i < tamanho; i++){
+        				if(array[i].compareTo(max) > 0){
+            				max = array[i];
+        				}
+    				}
+					//numero de dugitos do maior valor
+					int d = 0;
+					int temp = max;
+					while (temp > 0) {
+						d++;
+						temp = temp / 10;
+					}
+					inicio = System.nanoTime();
+					Sorters.radixSort(array, tamanho, d);
+					fim = System.nanoTime();
+					display(array);
+					break;
 		}
 
         double tempoMs = (fim - inicio)/1_000_000.0; // converte para milissegundos
