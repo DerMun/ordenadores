@@ -51,4 +51,3 @@ public class Vectors{
         System.out.print("\n");
     }
 }
-
