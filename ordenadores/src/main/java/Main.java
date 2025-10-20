@@ -19,13 +19,15 @@ public class Main {
 		op = input.nextInt();
 		
 		if(op == 1){
-			System.out.print(" Escolha o tipo de vetor: ");
 			System.out.println("\n 1) Ordem crescente\n 2) Ordem decrescente\n 3) Números aleatórios\n 4) Números repitidos");
-			System.out.print(" : ");
+			System.out.print(" Escolha o tipo de vetor: ");
 			vetor = input.nextInt();
 			array = Vectors.escolheVetor(vetor);
 			n = 10;
 		} else if(op == 2) {
+			System.out.println("\n 1) Ordem crescente\n 2) Ordem decrescente\n 3) Números aleatórios\n 4) Números repitidos");
+			System.out.print(" Escolha o tipo de vetor: ");
+			vetor = input.nextInt();
 			System.out.print(" Escolha o tamanho do vetor: ");
 			n = input.nextInt();
 			array = Vectors.gerarArrayAleatorio(n);
