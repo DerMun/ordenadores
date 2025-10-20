@@ -1,14 +1,14 @@
-import utils.Sorters;
 import utils.Vectors;
-import utils.ChooseSorter;
 import utils.ArrayGenerator;
+import utils.ChooseSorter;
+import utils.SortersStopwatch;
+import utils.Sorters;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Main {
 	public static void main(String[] args) {
         
-		int op,vetor,algoritmo,n;
+		int op,vetor,algoritmo,n,r;
         Integer[] array = null;
         
         Scanner input = new Scanner(System.in);
@@ -23,14 +23,14 @@ public class Main {
 		
 			switch(op) {
 				case 1:
-					System.out.println("\n 1) Ordem crescente\n 2) Ordem decrescente\n 3) Números aleatórios\n 4) Números repetidos");
+					System.out.println("\n 1) Ordem crescente\n 2) Ordem decrescente\n 3) Números aleatórios\n 4) Números repitidos");
 					System.out.print(" Escolha o tipo de vetor: ");
 					vetor = input.nextInt();
 					array = Vectors.escolheVetorTeste(vetor);
 					n = 10;
 					break;
 				case 2:
-					System.out.println("\n 1) Ordem crescente\n 2) Ordem decrescente\n 3) Números repetidos");
+					System.out.println("\n 1) Ordem crescente\n 2) Ordem decrescente\n 3) Números repitidos");
 					System.out.print(" Escolha o tipo de vetor: ");
 					vetor = input.nextInt();
 					System.out.print(" Escolha o tamanho do vetor: ");
@@ -49,8 +49,11 @@ public class Main {
 				algoritmo = input.nextInt();
         
 				if(algoritmo > 0 & algoritmo <= 9){
-					ChooseSorter.sorter(array, algoritmo, n);
+					System.out.print(" Escolha o numero de repeticoes: ");
+					r = input.nextInt();
+					ChooseSorter.sorter(array, algoritmo, r);
 				}
+				
 			} while(algoritmo != 0);
 		} while(op != 0);
 	}
