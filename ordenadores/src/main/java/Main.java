@@ -23,14 +23,14 @@ public class Main {
 		
 			switch(op) {
 				case 1:
-					System.out.println("\n 1) Ordem crescente\n 2) Ordem decrescente\n 3) Números aleatórios\n 4) Números repitidos");
+					System.out.println("\n 1) Ordem crescente\n 2) Ordem decrescente\n 3) Números aleatórios\n 4) Números repetidos");
 					System.out.print(" Escolha o tipo de vetor: ");
 					vetor = input.nextInt();
 					array = Vectors.escolheVetorTeste(vetor);
 					n = 10;
 					break;
 				case 2:
-					System.out.println("\n 1) Ordem crescente\n 2) Ordem decrescente\n 3) Números repitidos");
+					System.out.println("\n 1) Ordem crescente\n 2) Ordem decrescente\n 3) Números repetidos");
 					System.out.print(" Escolha o tipo de vetor: ");
 					vetor = input.nextInt();
 					System.out.print(" Escolha o tamanho do vetor: ");
