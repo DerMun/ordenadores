@@ -34,7 +34,7 @@ public class Main {
 			System.exit(0);
 		}
 		
-do {
+		do {
 
 		System.out.print(" Escolha o tipo de algoritmo: ");
 		System.out.println("\n 1) Bubble\n 2) Insertion\n 3) Selection\n 4) Shell\n 5) Heap\n 6) Merge\n 7) Quick\n 8) Couting\n 9) Radix\n");
@@ -42,6 +42,6 @@ do {
         
 		ChooseSorter.sorter(array, algoritmo, n);
         
-	} while(op != 0); 
+		} while(op != 0); 
     }
 }
