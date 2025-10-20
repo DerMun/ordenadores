@@ -10,10 +10,8 @@ public class ArrayGenerator {
         	for (int i = 0; i < tamanho; i++) {
             		array[i] = random.nextInt(tamanho); // gera número de 0 a n
         	}
-
         	return array;
 	}
-
 
 	public static Integer[] generateAscendingArray(int tamanho) {
 		Integer[] array = new Integer[tamanho];
@@ -24,7 +22,6 @@ public class ArrayGenerator {
 		return array;
     	}
 
-
 	public static Integer[] generateDescendingArray(int tamanho) {
 		Integer[] array = new Integer[tamanho];
 
@@ -33,7 +30,6 @@ public class ArrayGenerator {
 		}
 		return array;
 	}
-
 
 	public static Integer[] generateRepeatedArray(int tamanho) {
 		Integer[] array = new Integer[tamanho];
@@ -46,5 +42,4 @@ public class ArrayGenerator {
 		}
 		return array;
 	}
-
 }
