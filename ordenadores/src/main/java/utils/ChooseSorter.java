@@ -91,6 +91,6 @@ public class ChooseSorter {
 
 		double tempoMs = (fim - inicio)/1_000_000.0; // converte para milissegundos
 
-		System.out.printf("\nTempo de execuC'C#o: %.10f ms\n", tempoMs);
+		System.out.printf("\n Tempo de execucucao: %.10f ms\n", tempoMs);
 	}
 }
