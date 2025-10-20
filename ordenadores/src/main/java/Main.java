@@ -15,20 +15,20 @@ public class Main {
         op = vetor = algoritmo = n = 0;
 
 		System.out.println("\n 1) Utilizar vetores de teste\n 2) Gerar vetor de tamanho personalizado\n 0) Sair da aplicacao");
-		System.out.print(" Escolha uma das opcoes: ");
+		System.out.print(" \nEscolha uma das opcoes: ");
 		op = input.nextInt();
 		
 		if(op == 1){
 			System.out.println("\n 1) Ordem crescente\n 2) Ordem decrescente\n 3) Números aleatórios\n 4) Números repitidos");
-			System.out.print(" Escolha o tipo de vetor: ");
+			System.out.print(" \nEscolha o tipo de vetor: ");
 			vetor = input.nextInt();
 			array = Vectors.escolheVetor(vetor);
 			n = 10;
 		} else if(op == 2) {
-			System.out.println("\n 1) Ordem crescente\n 2) Ordem decrescente\n 3) Números aleatórios\n 4) Números repitidos");
-			System.out.print(" Escolha o tipo de vetor: ");
+			System.out.println("\n 1) Ordem crescente\n 2) Ordem decrescente\n 3) Números repitidos");
+			System.out.print(" \nEscolha o tipo de vetor: ");
 			vetor = input.nextInt();
-			System.out.print(" Escolha o tamanho do vetor: ");
+			System.out.print(" \nEscolha o tamanho do vetor: ");
 			n = input.nextInt();
 			array = Vectors.gerarArrayAleatorio(n);
 		} else {
