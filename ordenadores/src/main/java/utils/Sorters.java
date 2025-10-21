@@ -1,5 +1,8 @@
 package utils;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class Sorters {
 
     // ---------- QUICK SORT ----------
@@ -203,4 +206,54 @@ public class Sorters {
 
         radixSort(A, A.length, d);
     }
+
+    // ---------- BUCKET SORT ----------
+    public static <T extends Comparable<T>> void bucketSort(T[] A, int n) {
+        // criar n buckets/listas
+        List<T>[] buckets = new List[n];
+        for (int i = 0; i < n; i++) {
+            buckets[i] = new ArrayList<>();
+        }
+
+        // encontrar o valor máximo e mínimo para normalizar os índices
+        T min = getMinValue(A);
+        T max = getMaxValue(A);
+
+        // distribuir os elementos
+        for (T value : A) {
+            int bucketIndex = (int) ((value.compareTo(min)) * (n - 1) / (max.compareTo(min) + 1.0));
+            buckets[bucketIndex].add(value);
+        }
+
+        // ordenar cada bucket com insertionSort
+        int index = 0;
+        for (List<T> bucket : buckets) {
+            T[] bucketArray = (T[]) bucket.toArray(new Comparable[0]);
+            insertionSort(bucketArray, bucketArray.length);
+            for (T value : bucketArray) {
+                A[index++] = value;
+            }
+        }
+    }
+
+    private static <T extends Comparable<T>> T getMaxValue(T[] A) {
+        T max = A[0];
+        for (T value : A) {
+            if (value.compareTo(max) > 0) {
+                max = value;
+            }
+        }
+        return max;
+    }
+
+    private static <T extends Comparable<T>> T getMinValue(T[] A) {
+        T min = A[0];
+        for (T value : A) {
+            if (value.compareTo(min) < 0) {
+                min = value;
+            }
+        }
+        return min;
+    }
+
 }

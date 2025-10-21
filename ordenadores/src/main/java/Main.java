@@ -17,7 +17,7 @@ public class Main {
 
 		do {
 
-			System.out.println("\n 1) Utilizar vetores de teste\n 2) Gerar vetor de tamanho personalizado\n 0) Sair da aplicacao");
+			System.out.println("\n 1) Utilizar vetores de teste\n 2) Gerar vetor de tamanho personalizado \n 3) Gerar vetores e analisar ordenadores \n 0) Sair da aplicacao");
 			System.out.print(" Escolha uma das opcoes: ");
 			op = input.nextInt();
 		
@@ -37,6 +37,19 @@ public class Main {
 					n = input.nextInt();
 					array = Vectors.escolheVetorPersonalizado(vetor, n);
 					break;
+				case 3:
+					int len = 10000;
+					final int RUNS = 30;
+
+					System.out.print("vetor de tamanho: " + len);
+					System.out.print("num de execucoes: " + RUNS);
+
+					Integer[] asc = ArrayGenerator.generateAscendingArray(len);
+					Integer[] des = ArrayGenerator.generateDescendingArray(len);
+					Integer[] random = ArrayGenerator.generateRandomArray(len);
+					Integer[] rep = ArrayGenerator.generateRepeatedArray(len);
+
+					SortersStopwatch.runTimersForAll(asc, des, random, rep, RUNS);
 				case 0:
 					System.exit(0);
 			}
