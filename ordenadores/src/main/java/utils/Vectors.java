@@ -33,7 +33,7 @@ public class Vectors{
 				array = ArrayGenerator.generateDescendingArray(n);
 				return array;
 			case 3:
-				array = ArrayGenerator.generateRepeatedArray(n);
+				array = ArrayGenerator.generateRamdomArray(n);
 				return array;
 			default:
 				return null;
@@ -51,3 +51,4 @@ public class Vectors{
         System.out.print("\n");
     }
 }
+
