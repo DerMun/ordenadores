@@ -7,6 +7,9 @@ public class Sorters {
 
     // ---------- QUICK SORT ----------
     static <T extends Comparable<T>> int partition(T[] A, int low, int high) {
+        int pivotIndex = low + (int)(Math.random() * (high - low + 1));
+        swap(A, pivotIndex, high);
+
         T pivot = A[high];
         int i = low - 1;
         for (int j = low; j <= high - 1; j++) {
