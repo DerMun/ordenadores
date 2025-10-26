@@ -38,7 +38,7 @@ public class Main {
 					array = Vectors.escolheVetorPersonalizado(vetor, n);
 					break;
 				case 3:
-					int len = 10000;
+					int len = 100000;
 					final int RUNS = 30;
 
 					System.out.print("vetor de tamanho: " + len);
